@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -57,17 +55,11 @@
       </Pane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
          <children>
-            <MenuBar fx:id="myMenuBar" layoutX="184.0" layoutY="19.0" prefHeight="32.0" prefWidth="115.0" style="-fx-background-color: #fdb927;" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-              <menus>
-                <Menu mnemonicParsing="false" text="Main Menu">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#habits" text="Habits" />
-                        <MenuItem mnemonicParsing="false" text="Statistics" />
-                        <MenuItem mnemonicParsing="false" text="Goals" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
+            <Button fx:id="btn1" layoutX="231.0" layoutY="14.0" mnemonicParsing="false" onAction="#handlebtn1" text="Habits" textFill="#fdb927" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="SansSerif Bold" size="18.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>

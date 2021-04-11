@@ -119,5 +119,10 @@
             </Button>
          </children>
       </VBox>
+      <Button fx:id="btn2" layoutX="746.0" layoutY="25.0" mnemonicParsing="false" onAction="#handlebtn2" text="Home" textFill="#fdb927" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <font>
+            <Font name="SansSerif Bold" size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
