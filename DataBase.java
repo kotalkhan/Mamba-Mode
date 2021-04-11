@@ -92,20 +92,20 @@ public class DataBase {
 
 			while (rs.next()) {
 				String habit = rs.getString("habit");
-				int goal = rs.getInt("goal");
-				String days = rs.getString("days");
+				String goal = rs.getString("goal");
+				int days = rs.getInt("days");
 				
 				boolean[] daysBool = new boolean[7];
 				
-				for(int i =0; i < days.length(); i++) {
-					if(days.charAt(i) == '1') {
+				for(int i = 0; i < goal.length(); i++) {
+					if(goal.charAt(i) == '1') {
 						daysBool[i] = true;
 					} else {
 						daysBool[i] = false;
 					}
 				}
 				
-				Habit h = new Habit(habit, daysBool, Integer.parseInt(days));
+				Habit h = new Habit(habit, days, daysBool);
 				habits.add(h);
 			}
 			
@@ -120,30 +120,17 @@ public class DataBase {
 	 * printValues - prints the values into the the console
 	 */
 	public void printValues() {
-		String sql = "SELECT habit, goal, days FROM HABITS";
-		try {
-			ResultSet rs = statement.executeQuery(sql);
-
-			while (rs.next()) {
-				String habit = rs.getString("habit");
-				int goal = rs.getInt("goal");
-				String days = rs.getString("days");
-			
-
-				System.out.print("Habit: " + habit);
-				System.out.print(" | Goal: " + goal);
-				System.out.print(" | Days: " + days + "\n");
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
+		ArrayList<Habit> h = getHabits();
+		
+		for(Habit habit : h) {
+			System.out.println(habit);
 		}
 	}
 
 	public static void main(String[] args) {
 		DataBase DB = new DataBase("New db");
 		boolean[] days = {true, false, true, true, false, false, false };
-		Habit h = new Habit("Climbing rocks", days, 3);
+		Habit h = new Habit("Climbing rocks", 3, days);
 		
 		DB.printValues();
 	}
