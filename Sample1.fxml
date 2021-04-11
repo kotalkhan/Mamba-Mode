@@ -57,7 +57,7 @@
       </Pane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
          <children>
-            <MenuBar layoutX="184.0" layoutY="19.0" prefHeight="32.0" prefWidth="115.0" style="-fx-background-color: #fdb927;" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <MenuBar fx:id="myMenuBar" layoutX="184.0" layoutY="19.0" prefHeight="32.0" prefWidth="115.0" style="-fx-background-color: #fdb927;" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
               <menus>
                 <Menu mnemonicParsing="false" text="Main Menu">
                   <items>
