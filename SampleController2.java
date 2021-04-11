@@ -82,7 +82,7 @@ public class SampleController2 {
 //    		primary.setScene(new Scene(root,850,500));
 //    		primary.show();
     		Stage primaryStage = this.stage;
-    		Parent pane = FXMLLoader.load(getClass().getResource("Sample2.fxml"));
+    		Parent pane = FXMLLoader.load(getClass().getResource("Sample1.fxml"));
     		primaryStage.getScene().setRoot(pane);
     	}
     }
