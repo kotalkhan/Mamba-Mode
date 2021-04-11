@@ -1,6 +1,7 @@
 package kobe;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * DataBase - a class that handles pulling and pushing data from and to a database through SQLLite
@@ -80,6 +81,42 @@ public class DataBase {
 	}
 
 	/**
+	 * getHabits - gets all the habits from the database
+	 * @return - an arraylist<Habit> with all the habits that are stored in the database
+	 */
+	public ArrayList<Habit> getHabits(){
+		ArrayList<Habit> habits = new ArrayList<Habit>();
+		String sql = "SELECT habit, goal, days FROM HABITS";
+		try {
+			ResultSet rs = statement.executeQuery(sql);
+
+			while (rs.next()) {
+				String habit = rs.getString("habit");
+				int goal = rs.getInt("goal");
+				String days = rs.getString("days");
+				
+				boolean[] daysBool = new boolean[7];
+				
+				for(int i =0; i < days.length(); i++) {
+					if(days.charAt(i) == '1') {
+						daysBool[i] = true;
+					} else {
+						daysBool[i] = false;
+					}
+				}
+				
+				Habit h = new Habit(habit, daysBool, Integer.parseInt(days));
+				habits.add(h);
+			}
+			
+			return habits;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	/**
 	 * printValues - prints the values into the the console
 	 */
 	public void printValues() {
@@ -88,14 +125,14 @@ public class DataBase {
 			ResultSet rs = statement.executeQuery(sql);
 
 			while (rs.next()) {
-				String id = rs.getString("habit");
-				int age = rs.getInt("goal");
-				String first = rs.getString("days");
+				String habit = rs.getString("habit");
+				int goal = rs.getInt("goal");
+				String days = rs.getString("days");
 			
 
-				System.out.print("Habit: " + id);
-				System.out.print(" | Goal: " + age);
-				System.out.print(" | Days: " + first + "\n");
+				System.out.print("Habit: " + habit);
+				System.out.print(" | Goal: " + goal);
+				System.out.print(" | Days: " + days + "\n");
 			}
 			
 		} catch (SQLException e) {
