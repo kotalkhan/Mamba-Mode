@@ -1,13 +1,15 @@
+package kobe;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Habit 
 {
 	private String habit;
-	private List<String> daysOfWeek;
+	private boolean[] daysOfWeek;
 	private int goal;
 	
-	public Habit(String habit, List<String> daysOfWeek, int goal) 
+	public Habit(String habit, boolean[] daysOfWeek, int goal) 
 	{
 		this.habit = habit;
 		this.daysOfWeek = daysOfWeek;
@@ -20,16 +22,16 @@ public class Habit
 	 * */
 	public void editGoal(Habit hab, int newGoal) 
 	{
-		this.goal = newGoal;
+		hab.goal = newGoal;
 	}
 	
 	/*
 	 * I'm gonna index each day of the week so Sunday is 0 and Saturday is 7. We'll
 	 * handle representing the numbers in the array as actual days/Strings later. 
 	 */
-	public void editDaysOfWeek(Habit hab, ArrayList<String> newDays) 
+	public void editDaysOfWeek(Habit hab, boolean[] days) 
 	{
-		this.daysOfWeek = newDays;
+		hab.daysOfWeek = days;
 	}
 	
 	public String getHabit() 
@@ -38,9 +40,9 @@ public class Habit
 	}
 	
 	
-	public List<String> getDaysOfWeek()
+	public boolean[] getDays()
 	{
-		return this.daysOfWeek;
+		return daysOfWeek;
 	}
 	
 	public int getGoal() 
@@ -48,10 +50,27 @@ public class Habit
 		return this.goal;
 	}
 	
+	public String[] getHabitInfo(){
+		String[] info = new String[3];
+		String days = "";
+		for(boolean i : daysOfWeek) {
+			if(i == true) {
+				days += "1";
+			} else {
+				days += "0";
+			}
+		}
+		info[0] = habit;
+		info[1] = days;
+		info[2] = String.valueOf(goal);
+		
+		return info;
+				
+	}
+	
 	public String toString() 
 	{
 		return "This habit is called " + this.habit + ". It is scheduled to be done on " + this.daysOfWeek.toString() + ". You are aiming to do it " + this.goal + " times per day.";
-	
 				
 	}
 
