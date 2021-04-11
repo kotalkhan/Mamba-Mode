@@ -47,9 +47,9 @@
       </Text>
       <Pane prefHeight="300.0" prefWidth="325.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
          <children>
-            <ImageView fitHeight="460.0" fitWidth="426.0" layoutX="-72.0" layoutY="-167.0">
+            <ImageView fitHeight="469.0" fitWidth="452.0" layoutX="-73.0" layoutY="-171.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../Downloads/kobe.png" />
+                  <Image url="@../../picture/kobe.png" />
                </image>
             </ImageView>
          </children>
