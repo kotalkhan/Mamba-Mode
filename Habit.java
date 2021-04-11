@@ -67,11 +67,5 @@ public class Habit
 		return info;
 				
 	}
-	
-	public String toString() 
-	{
-		return "This habit is called " + this.habit + ". It is scheduled to be done on " + this.daysOfWeek.toString() + ". You are aiming to do it " + this.goal + " times per day.";
-				
-	}
 
 }
