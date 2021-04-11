@@ -3,69 +3,75 @@ package kobe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Habit 
-{
+public class Habit {
 	private String habit;
 	private boolean[] daysOfWeek;
 	private int goal;
-	
-	public Habit(String habit, boolean[] daysOfWeek, int goal) 
-	{
+
+	public Habit(String habit, int goal, boolean[] dOW) {
 		this.habit = habit;
-		this.daysOfWeek = daysOfWeek;
+		this.daysOfWeek = dOW;
 		this.goal = goal;
 	}
-	
-	/* We don't need a method to change the name of the Habit, they can
-	 * just make a new Habit in that case and delete the one they
-	 * don't want anymore. lmk if you guys think otherwise.
-	 * */
-	public void editGoal(Habit hab, int newGoal) 
-	{
+
+	/**
+	 * editgoal - edits the goal of a certain habit
+	 * 
+	 * @param hab     - the habit you want to change
+	 * @param newGoal - the new int value you want to change goal to
+	 */
+	public void editGoal(Habit hab, int newGoal) {
 		hab.goal = newGoal;
 	}
-	
-	/*
-	 * I'm gonna index each day of the week so Sunday is 0 and Saturday is 7. We'll
-	 * handle representing the numbers in the array as actual days/Strings later. 
+
+	/**
+	 * editDaysOfWeek - edits the days of the week
+	 * 
+	 * @param hab     - the habit you want to change
+	 * @param newGoal - the days of the week that the habit should be done
 	 */
-	public void editDaysOfWeek(Habit hab, boolean[] days) 
-	{
+	public void editDaysOfWeek(Habit hab, boolean[] days) {
 		hab.daysOfWeek = days;
 	}
-	
-	public String getHabit() 
-	{
+
+	public String getHabit() {
 		return this.habit;
 	}
-	
-	
-	public boolean[] getDays()
-	{
+
+	public boolean[] getDays() {
 		return daysOfWeek;
 	}
-	
-	public int getGoal() 
-	{
+
+	public int getGoal() {
 		return this.goal;
 	}
-	
-	public String[] getHabitInfo(){
+
+	/**
+	 * 
+	 * @return an array where the first value is the habit, the second value is the
+	 *         days of the week, and the last value is goals
+	 */
+	public String[] getHabitInfo() {
 		String[] info = new String[3];
 		String days = "";
-		for(boolean i : daysOfWeek) {
-			if(i == true) {
+
+		for (int i = 0; i < 7; i++) {
+			if (daysOfWeek[i] == true) {
 				days += "1";
 			} else {
 				days += "0";
 			}
 		}
+
 		info[0] = habit;
 		info[1] = days;
 		info[2] = String.valueOf(goal);
-		
+
 		return info;
-				
+	}
+
+	public String toString() {
+		return "Habit: " + habit + " | Days of the week: " + getHabitInfo()[1] + " | Goal: " + goal;
 	}
 
 }
