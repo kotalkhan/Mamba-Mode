@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 
 public class SampleController2 {
 
+	private Stage stage;
+	
     @FXML
     private ComboBox mainMenu;
 
@@ -75,10 +77,13 @@ public class SampleController2 {
     	String s = mainMenu.getSelectionModel().getSelectedItem().toString();
     	//checks if habit is home to go back
     	if(s.equals("Home")) {
-    		Stage primary = new Stage();
-    		Parent root = FXMLLoader.load(getClass().getResource("Sample1.fxml"));
-    		primary.setScene(new Scene(root,850,500));
-    		primary.show();
+//    		Stage primary = new Stage();
+//    		Parent root = FXMLLoader.load(getClass().getResource("Sample1.fxml"));
+//    		primary.setScene(new Scene(root,850,500));
+//    		primary.show();
+    		Stage primaryStage = this.stage;
+    		Parent pane = FXMLLoader.load(getClass().getResource("Sample2.fxml"));
+    		primaryStage.getScene().setRoot(pane);
     	}
     }
     
