@@ -1,33 +1,76 @@
 package application;
 
-import java.io.IOException;
+import java.awt.TextField;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuBar;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.stage.Stage;
 
-
 public class SampleController {
-	
-	private Stage stage; 
-	private Scene scene;
-	private Parent root;
-	
-	@FXML
-	private MenuBar myMenuBar;
-	
+
     @FXML
-    void habits(ActionEvent event) throws IOException{
-    	root = FXMLLoader.load(getClass().getResource("Sample2.fxml"));
-    	scene = new Scene(root);
-    	stage = (Stage) myMenuBar.getScene().getWindow(); 	
-    	stage.setScene(scene);
-    	stage.show();
+    Button btn1;
+    Button btn2;
+
+    @FXML
+    void handlebtn1() throws Exception {
+      	Parent root = FXMLLoader.load(getClass().getResource("Sample2.fxml"));
+    	Stage window = (Stage) btn1.getScene().getWindow(); 	
+    	window.setScene(new Scene(root, 800, 500));
     }
+    
+    @FXML
+    void handlebtn2() throws Exception {
+      	Parent root = FXMLLoader.load(getClass().getResource("Sample1.fxml"));
+    	Stage window = (Stage) btn2.getScene().getWindow(); 	
+    	window.setScene(new Scene(root, 800, 500));
+    }  
+
+//    @FXML
+//    private TextField goal;
+//
+//    @FXML
+//    private TextField habit;
+//
+//    @FXML
+//    private CheckBox sun;
+//
+//    @FXML
+//    private CheckBox mon;
+//
+//    @FXML
+//    private CheckBox tue;
+//
+//    @FXML
+//    private CheckBox wed;
+//
+//    @FXML
+//    private CheckBox thu;
+//
+//    @FXML
+//    private CheckBox fri;
+//
+//    @FXML
+//    private CheckBox sat;
+//
+//    @FXML
+//    private Button confirm;
+//
+//    @FXML
+//    void add(ActionEvent event) {
+//
+//    	sun.setSelected(false);
+//    	mon.setSelected(false);
+//    	tue.setSelected(false);
+//    	wed.setSelected(false);
+//    	thu.setSelected(false);
+//    	fri.setSelected(false);
+//    	sat.setSelected(false);
+//    }
+
 }
-
-
