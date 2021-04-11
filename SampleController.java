@@ -24,12 +24,13 @@ public class SampleController {
         mainMenu.setItems(dropDown);
     }
     
-    @FXML
-    void select(ActionEvent event) {
-    	String s = mainMenu.getSelectionModel().getSelectedItem().toString();
-    	label.setText(s);
-    }
-    
+//    don't think i need this
+//    @FXML
+//    void select(ActionEvent event) {
+//    	String s = mainMenu.getSelectionModel().getSelectedItem().toString();
+//    	label.setText(s);
+//    }
+//    
 //    @FXML
 //    private void mainChoice() {
 //    	if(mainMenu.getValue().equals("Habits")) {

@@ -56,17 +56,12 @@
       </Pane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
          <children>
-            <ComboBox fx:id="mainMenu" layoutX="159.0" layoutY="20.0" onAction="#select" prefWidth="150.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+            <ComboBox fx:id="mainMenu" layoutX="159.0" layoutY="20.0" onAction="#select" prefHeight="31.0" prefWidth="129.0" promptText="Main Menu" style="-fx-background-color: #fdb927;" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
             <Label fx:id="label" alignment="CENTER" layoutX="105.0" layoutY="51.0" opacity="0.5" prefHeight="35.0" prefWidth="200.0" textFill="WHITE">
                <font>
                   <Font name="System Bold Italic" size="20.0" />
                </font>
             </Label>
-            <Text fill="#fdb927" layoutX="163.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Menu" textAlignment="CENTER" wrappingWidth="100.62255859375">
-               <font>
-                  <Font name="SansSerif Bold" size="18.0" />
-               </font>
-            </Text>
          </children>
       </AnchorPane>
    </children>
