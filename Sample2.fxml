@@ -12,22 +12,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" style="-fx-background-color: #552583;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" style="-fx-background-color: #552583;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController2">
    <children>
       <Text fill="#fdb927" layoutX="18.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Habits" wrappingWidth="117.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
          <font>
             <Font name="SansSerif Bold Italic" size="38.0" />
          </font>
       </Text>
-      <ComboBox fx:id="mainMenu" layoutX="677.0" layoutY="26.0" onAction="#select" prefWidth="150.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
-      <Text fill="#fdb927" layoutX="689.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Menu" wrappingWidth="101.00000096857548">
-         <font>
-            <Font name="SansSerif Bold" size="18.0" />
-         </font>
-      </Text>
+      <ComboBox fx:id="mainMenu" layoutX="677.0" layoutY="26.0" onAction="#select" prefHeight="31.0" prefWidth="129.0" promptText="Main Menu" style="-fx-background-color: #fdb927;" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
       <HBox layoutX="105.0" layoutY="105.0" prefHeight="31.0" prefWidth="641.0" spacing="175.0" AnchorPane.topAnchor="100.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#h" text="Add Habit">
+            <Button mnemonicParsing="false" text="Add Habit">
                <font>
                   <Font name="SansSerif Bold" size="15.0" />
                </font>
@@ -65,7 +60,7 @@
       </VBox>
       <VBox layoutX="376.0" layoutY="183.0" prefHeight="200.0" prefWidth="291.0" spacing="20.0" AnchorPane.leftAnchor="376.0">
          <children>
-            <TextField prefHeight="31.0" prefWidth="167.0" />
+            <TextField fx:id="goal" prefHeight="31.0" prefWidth="167.0" />
             <TextField fx:id="habit" />
             <HBox prefHeight="23.0" prefWidth="294.0" spacing="20.0">
                <children>
@@ -126,5 +121,10 @@
             </Button>
          </children>
       </VBox>
+      <Label fx:id="label" layoutX="630.0" layoutY="51.0" prefHeight="35.0" prefWidth="200.0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
