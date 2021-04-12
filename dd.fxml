@@ -11,8 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #552583;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" style="-fx-background-color: #552583;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
    <children>
       <Text fill="#fdb927" layoutX="37.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Habits" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
          <font>
@@ -87,7 +86,7 @@
                   <Insets left="50.0" />
                </padding>
             </HBox>
-            <Button fx:id="confirm" mnemonicParsing="false" prefHeight="27.0" prefWidth="200.0" text="CONFIRM" textAlignment="CENTER">
+            <Button fx:id="confirm" mnemonicParsing="false" onAction="#add" prefHeight="27.0" prefWidth="200.0" text="CONFIRM" textAlignment="CENTER">
                <font>
                   <Font name="SansSerif Bold" size="15.0" />
                </font>

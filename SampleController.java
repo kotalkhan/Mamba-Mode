@@ -19,58 +19,58 @@ public class SampleController {
 
     @FXML
     void handlebtn1() throws Exception {
-      	Parent root = FXMLLoader.load(getClass().getResource("Sample2.fxml"));
+      	Parent root = FXMLLoader.load(getClass().getResource("dd.fxml"));
     	Stage window = (Stage) btn1.getScene().getWindow(); 	
-    	window.setScene(new Scene(root, 800, 500));
+    	window.setScene(new Scene(root, 850, 500));
     }
     
     @FXML
     void handlebtn2() throws Exception {
       	Parent root = FXMLLoader.load(getClass().getResource("Sample1.fxml"));
     	Stage window = (Stage) btn2.getScene().getWindow(); 	
-    	window.setScene(new Scene(root, 800, 500));
+    	window.setScene(new Scene(root, 850, 500));
     }  
 
-//    @FXML
-//    private TextField goal;
-//
-//    @FXML
-//    private TextField habit;
-//
-//    @FXML
-//    private CheckBox sun;
-//
-//    @FXML
-//    private CheckBox mon;
-//
-//    @FXML
-//    private CheckBox tue;
-//
-//    @FXML
-//    private CheckBox wed;
-//
-//    @FXML
-//    private CheckBox thu;
-//
-//    @FXML
-//    private CheckBox fri;
-//
-//    @FXML
-//    private CheckBox sat;
-//
-//    @FXML
-//    private Button confirm;
-//
-//    @FXML
-//    void add(ActionEvent event) {
-//
-//    	sun.setSelected(false);
-//    	mon.setSelected(false);
-//    	tue.setSelected(false);
-//    	wed.setSelected(false);
-//    	thu.setSelected(false);
-//    	fri.setSelected(false);
-//    	sat.setSelected(false);
-//    }
+
+    @FXML
+    private TextField habit;
+
+    @FXML
+    private CheckBox sun;
+
+    @FXML
+    private CheckBox mon;
+
+    @FXML
+    private CheckBox tue;
+
+    @FXML
+    private CheckBox wed;
+
+    @FXML
+    private CheckBox thu;
+
+    @FXML
+    private CheckBox fri;
+
+    @FXML
+    private CheckBox sat;
+
+	@FXML
+	void add(ActionEvent event) {
+		clearChecked();
+	}
+
+	void clearChecked() {
+		// habit.getEditor().clear();
+		sun.setSelected(false);
+		mon.setSelected(false);
+		tue.setSelected(false);
+		wed.setSelected(false);
+		thu.setSelected(false);
+		fri.setSelected(false);
+		sat.setSelected(false);
+
+	}
 
 }
