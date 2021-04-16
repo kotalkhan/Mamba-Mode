@@ -1,113 +1,79 @@
 package application;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-
+/**
+ * TaskManager - takes care of manipulating the data from the data given from the GUI input of the user and pushes the data to the Database
+ * @author Edward P, Mohammad N, Aravind U
+ *
+ */
 public class TaskManager {
+	private Database db;
 
-    @FXML
-    Button btn1;
-    Button btn2;
-
-    @FXML
-    /*
-     * Handles the transition from the home page to the add screen
-     */
-    void handlebtn1() throws Exception {
-      	Parent root = FXMLLoader.load(getClass().getResource("dd.fxml"));
-    	Stage window = (Stage) btn1.getScene().getWindow(); 	
-    	window.setScene(new Scene(root, 850, 500));
-    }
-    
-    @FXML
-    /*
-     * Handles the transition from the add screen to the home page
-     */
-    void handlebtn2() throws Exception {
-      	Parent root = FXMLLoader.load(getClass().getResource("Sample1.fxml"));
-    	Stage window = (Stage) btn2.getScene().getWindow(); 	
-    	window.setScene(new Scene(root, 850, 500));
-    }  
-
-    @FXML
-    private TextField habit;
-
-    @FXML
-    private CheckBox sun;
-
-    @FXML
-    private CheckBox mon;
-
-    @FXML
-    private CheckBox tue;
-
-    @FXML
-    private CheckBox wed;
-
-    @FXML
-    private CheckBox thu;
-
-    @FXML
-    private CheckBox fri;
-
-    @FXML
-    private CheckBox sat;
-
-	@FXML
-	/*
-	 * Adds data from the GUI to the database
-	 */
-	void add(ActionEvent event) {	
-		String goal = habit.getText();
-		//add goal to habit
-	  
-		if(sun.isSelected()) {
-			//add in whatever position
-		}
-		if(mon.isSelected()) {
-			//add in whatever position
-		}
-		if(tue.isSelected()) {
-			//add in whatever position
-		}
-		if(wed.isSelected()) {
-			//add in whatever position
-		}
-		if(thu.isSelected()) {
-			//add in whatever position
-		}
-		if(fri.isSelected()) {
-			//add in whatever position
-		}
-		if(sat.isSelected()) {
-			//add in whatever position
-		}
-		if(sun.isSelected()) {
-			//add in whatever position
-		}
-		
-		clearChecked();
+	public TaskManager(String dataBaseName) {
+		db = new Database("New db");
 	}
 
-	/*
-	 * Clears all checkboxes after confirm button is chosen
+	/**
+	 * gets the information from the GUI and adds the habit to the Database
 	 */
-	void clearChecked() {
-		sun.setSelected(false);
-		mon.setSelected(false);
-		tue.setSelected(false);
-		wed.setSelected(false);
-		thu.setSelected(false);
-		fri.setSelected(false);
-		sat.setSelected(false);
 
+	/**
+	 * addFromGUIToDB - gets the information from the GUI and turns the information
+	 * into the habit and pushes it to the database
+	 * 
+	 * @param habit - the string of the habit to be made
+	 * @param days  - the boolean array representing the days of the week that the
+	 *              habit is planned to be done on
+	 */
+	public void addFromGUIToDB(String habit, boolean[] days) {
+		Habit h = new Habit(habit, daysToGoal(days), days);
+		db.addHabit(h);
 	}
 
+//--------------------------------METHODS HANDLING HABIT STATISTICS--------------------------------
+//	/**
+//	 * int array where a[0] = days completed, days[1] = days missed, days[2] = days to occur
+//	 *
+//	 */
+//	public updateDatabaseStats(Habit h, int[] days) {
+//		
+//	}
+//	
+//	/**
+//	 * int array where a[0] = days completed, days[1] = days missed, days[2] = days to occur
+//	 *
+//	 */
+//	public int[] getWeeklyHabitStats(Habit habit, int[] days) {
+//	
+//	}
+//	
+//	
+//	/**
+//	 * int array where a[0] = days completed, days[1] = days missed, days[2] = days to occur
+//	 *
+//	 */
+//	public int[] getAllTimeHabitStats() {
+//		
+//	}
+
+
+//-----------------------------------------HELPER METHODS--------------------------------------
+
+	/**
+	 * daysToGoals - takes in a boolean array and counts the number of true values
+	 * in the boolean
+	 * 
+	 * @param days - the array of the days that a habit is planned to be done
+	 * @return the number of days that the habit should be done per day.
+	 */
+	private int daysToGoal(boolean[] days) {
+		int count = 0;
+
+		for (boolean bool : days) {
+			if (bool) {
+				count++;
+			}
+		}
+
+		return count;
+	}
 }
