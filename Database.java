@@ -46,7 +46,7 @@ public class Database {
 		}
 	}
 
-//-------------------------------------DATABASE MANIPULATION METHODS------------------------------------
+//-------------------------------------DATABASE MANIPULATION METHODS--------------------------------------------------------
 	/**
 	 * addHabit - adds a habit to the data base
 	 * 
@@ -106,19 +106,19 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * updateWeeklyStat - changes the value within the DB table for the column
-	 * 'overall' which holds the stats for all time 
+	 * 'overall' which holds the stats for all time
 	 * 
-	 * @param stat - should have two Integer characters in the string where charAt(0) is
-	 *             the days completed and chatAt(1) is the days missed
+	 * @param stat - should have two Integer characters in the string where
+	 *             charAt(0) is the days completed and chatAt(1) is the days missed
 	 */
 	public void updateOverallStat(Habit h, String stat) {
-		if(stat.length() != 2) {
+		if (stat.length() != 2) {
 			throw new IllegalArgumentException("The String given is invalid");
 		}
-		
+
 		try {
 			statement = connection.createStatement();
 			String sql = "UPDATE HABITS " + "SET overall = '" + stat + "' WHERE habit LIKE '%" + h.getHabit() + "%'";
@@ -127,16 +127,17 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * resetWeeklyStat - resets the weekly stat in the data base to 000
+	 * 
 	 * @param h - the habit where you want to change the weekly stat
 	 */
 	public void resetWeeklyStat(Habit h) {
 		updateWeeklyStat(h, "000");
 	}
 
-//----------------------------DATA RETRIVAL METHODS-------------------------------------
+//----------------------------------------DATA RETRIVAL METHODS-------------------------------------------------------------
 	/**
 	 * getHabits - gets all the habits from the database
 	 * 
@@ -175,7 +176,66 @@ public class Database {
 
 		return null;
 	}
-	
+
+	/**
+	 * getOverallStat - gets the overall column for a certain habit
+	 * 
+	 * @param h - the habit that you are looking for in the database
+	 * @return a int[] where int[0] is the number of times completed and int[1] is
+	 *         the number of days missed
+	 */
+	public int[] getWeeklyStat(Habit h) {
+		int[] stats = new int[3];
+		try {
+			statement = connection.createStatement();
+			String sql = "SELECT weekly " + "FROM HABITS" + " WHERE habit LIKE '%" + h.getHabit() + "%'";
+			ResultSet rs = statement.executeQuery(sql);
+			
+			String statString = rs.getString("weekly");
+			
+			// puts the values into the array
+			stats[0] = charToInt(statString.charAt(0));
+			stats[1] = charToInt(statString.charAt(1));
+			stats[2] = charToInt(statString.charAt(2));
+
+			return stats;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return stats;
+	}
+
+	/**
+	 * getOverallStat - gets the overall column for a certain habit
+	 * 
+	 * @param h - the habit that you are looking for in the database
+	 * @return a int[] where int[0] is the number of times completed and int[1] is
+	 *         the number of days missed
+	 */
+	public int[] getOverallStat(Habit h) {
+		int[] stats = new int[2];
+		try {
+			// gets the data from the database
+			statement = connection.createStatement();
+			String sql = "SELECT overall " + "FROM HABITS" + " WHERE habit LIKE '%" + h.getHabit() + "%'";
+			ResultSet rs = statement.executeQuery(sql);
+
+			String statString = rs.getString("overall");
+			
+			// puts the values into the array
+			stats[0] = charToInt(statString.charAt(0));
+			stats[1] = charToInt(statString.charAt(1));
+
+			return stats;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return stats;
+	}
+
 	/**
 	 * printValues - prints the values into the the console
 	 */
@@ -186,15 +246,15 @@ public class Database {
 			System.out.println(habit);
 		}
 	}
-	
 
-	public static void main(String[] args) {
-		Database db = new Database("Tester");
-		String h = "Going on walks";
-		boolean[] days = { true, true, true, false, true, true, true };
-
-		Habit habit = new Habit(h, 3, days);
-
+//------------------------------------HELPER METHODS------------------------------------------------------------------------
+	/**
+	 * charToInt - converts a char to an int
+	 * @param a - the char value that you would like to convert
+	 * @return an integer value of the char given
+	 */
+	private int charToInt(char a) {
+		return Integer.parseInt(String.valueOf(a));
 	}
 
 }
