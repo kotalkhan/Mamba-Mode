@@ -30,34 +30,48 @@ public class TaskManager {
 	}
 
 //--------------------------------METHODS HANDLING HABIT STATISTICS--------------------------------
-//	/**
-//	 * int array where a[0] = days completed, days[1] = days missed, days[2] = days to occur
-//	 *
-//	 */
-//	public updateDatabaseStats(Habit h, int[] days) {
-//		
-//	}
-//	
-//	/**
-//	 * int array where a[0] = days completed, days[1] = days missed, days[2] = days to occur
-//	 *
-//	 */
-//	public int[] getWeeklyHabitStats(Habit habit, int[] days) {
-//	
-//	}
-//	
-//	
-//	/**
-//	 * int array where a[0] = days completed, days[1] = days missed, days[2] = days to occur
-//	 *
-//	 */
-//	public int[] getAllTimeHabitStats() {
-//		
-//	}
+	/**
+	 * int array where a[0] = days completed, days[1] = days missed, days[2] = days to occur
+	 *
+	 */
+	public void updateDatabaseStats(Habit habit, int[] days) {
+		db.updateWeeklyStat(habit, arrToString(days));
+	}
+	
+	/**
+	 * int array where a[0] = days completed, days[1] = days missed, days[2] = days to occur
+	 *
+	 */
+	public int[] getWeeklyHabitStats(Habit habit) {
+		return db.getWeeklyStat(habit);
+	}
+	
+	
+	/**
+	 * int array where a[0] = days completed, days[1] = days missed, days[2] = days to occur
+	 *
+	 */
+	public int[] getOverallHabitStats(Habit habit) {
+		return db.getOverallStat(habit);
+	}
 
 
 //-----------------------------------------HELPER METHODS--------------------------------------
 
+	/**
+	 * arrToString - changes the integer arr into a string 
+	 * @param arr - the int[] that you would like to convert into a string
+	 * @return a String where the values of the arr are side by side.
+	 */
+	private String arrToString(int[] arr) {
+		String s = "";
+		for(int i : arr) {
+			s += i;
+		}
+		
+		return s;
+	}
+	
 	/**
 	 * daysToGoals - takes in a boolean array and counts the number of true values
 	 * in the boolean
@@ -73,7 +87,13 @@ public class TaskManager {
 				count++;
 			}
 		}
-
+		
 		return count;
+	}
+	
+	public static void main(String[] args) {
+	
+		String num = "29 13 84 93";
+		
 	}
 }
