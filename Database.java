@@ -12,7 +12,7 @@ import java.util.HashSet;
  *
  */
 public class Database {
-	Connection connection = null;
+	static Connection connection = null;
 	String url;
 	Statement statement;
 
@@ -38,11 +38,19 @@ public class Database {
 
 			statement = connection.createStatement();
 			String sql = "CREATE TABLE IF NOT EXISTS HABITS " + " (habit VARCHAR(255), " + " goal INTEGER, "
-					+ " days VARCHAR(7), " + " weekly VARCHAR(3)," + " overall VARCHAR(2))";
+					+ " days VARCHAR(7), " + " weekly VARCHAR(15)," + " overall VARCHAR(15))";
 			statement.executeUpdate(sql);
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
+		}
+	}
+
+	public static void closeDB() {
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -115,9 +123,6 @@ public class Database {
 	 *             charAt(0) is the days completed and chatAt(1) is the days missed
 	 */
 	public void updateOverallStat(Habit h, String stat) {
-		if (stat.length() != 2) {
-			throw new IllegalArgumentException("The String given is invalid");
-		}
 
 		try {
 			statement = connection.createStatement();
@@ -190,9 +195,9 @@ public class Database {
 			statement = connection.createStatement();
 			String sql = "SELECT weekly " + "FROM HABITS" + " WHERE habit LIKE '%" + h.getHabit() + "%'";
 			ResultSet rs = statement.executeQuery(sql);
-			
+
 			String statString = rs.getString("weekly");
-			
+
 			// puts the values into the array
 			stats[0] = charToInt(statString.charAt(0));
 			stats[1] = charToInt(statString.charAt(1));
@@ -215,7 +220,7 @@ public class Database {
 	 *         the number of days missed
 	 */
 	public int[] getOverallStat(Habit h) {
-		int[] stats = new int[2];
+		int stats[] = new int[3];
 		try {
 			// gets the data from the database
 			statement = connection.createStatement();
@@ -223,10 +228,9 @@ public class Database {
 			ResultSet rs = statement.executeQuery(sql);
 
 			String statString = rs.getString("overall");
-			
+
 			// puts the values into the array
-			stats[0] = charToInt(statString.charAt(0));
-			stats[1] = charToInt(statString.charAt(1));
+			stats = stringToIntArr(statString);
 
 			return stats;
 		} catch (SQLException e) {
@@ -250,11 +254,30 @@ public class Database {
 //------------------------------------HELPER METHODS------------------------------------------------------------------------
 	/**
 	 * charToInt - converts a char to an int
+	 * 
 	 * @param a - the char value that you would like to convert
 	 * @return an integer value of the char given
 	 */
 	private int charToInt(char a) {
 		return Integer.parseInt(String.valueOf(a));
+	}
+
+	/**
+	 * stringToIntArr - takes a string of Intgers seperated by a whitespace and puts
+	 * it into an int array
+	 * 
+	 * @param s - the string that you would like to convert into a int array
+	 * @return the int array containing the values from the string;
+	 */
+	private int[] stringToIntArr(String s) {
+		String[] sArr = s.split(" ");
+		int[] intArr = new int[sArr.length];
+
+		for (int i = 0; i < intArr.length; i++) {
+			intArr[i] = Integer.parseInt(sArr[i]);
+		}
+
+		return intArr;
 	}
 
 }
