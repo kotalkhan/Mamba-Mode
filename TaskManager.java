@@ -91,9 +91,4 @@ public class TaskManager {
 		return count;
 	}
 	
-	public static void main(String[] args) {
-	
-		String num = "29 13 84 93";
-		
-	}
 }
