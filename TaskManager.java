@@ -25,6 +25,8 @@ public class TaskManager {
 	 * @param habit - the string of the habit to be made
 	 * @param days  - the boolean array representing the days of the week that the
 	 *              habit is planned to be done on
+	 * @param goals - an int array where the index represents the days and Habit
+	 *               where 0 = missed, 1 = completed, 2 = still to come
 	 */
 	public void addFromGUIToDB(String habit, boolean[] days, int[] goals) {
 		Habit h = new Habit(habit, daysToGoal(days), days, goals);
