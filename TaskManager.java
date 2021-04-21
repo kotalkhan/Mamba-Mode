@@ -28,8 +28,9 @@ public class TaskManager {
 	 * @param goals - an int array where the index represents the days and Habit
 	 *               where 0 = missed, 1 = completed, 2 = still to come
 	 */
-	public void addFromGUIToDB(String habit, boolean[] days, int[] goals) {
-		Habit h = new Habit(habit, daysToGoal(days), days, goals);
+	public void addFromGUIToDB(String habit, boolean[] days) {
+		int[] defaultGoal = {0, 0 ,0 ,0 ,0 ,0 ,0};
+		Habit h = new Habit(habit, daysToGoal(days), days, defaultGoal);
 		db.addHabit(h);
 	}
 
