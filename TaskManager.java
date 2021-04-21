@@ -11,7 +11,7 @@ public class TaskManager {
 	private Database db;
 
 	public TaskManager(String dataBaseName) {
-		db = new Database("New db");
+		db = new Database(dataBaseName);
 	}
 
 	/**
