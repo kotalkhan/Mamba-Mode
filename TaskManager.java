@@ -1,5 +1,7 @@
 package application;
 
+import java.util.ArrayList;
+
 /**
  * TaskManager - takes care of manipulating the data from the data given from the GUI input of the user and pushes the data to the Database
  * @author Edward P, Mohammad N, Aravind U
@@ -24,18 +26,22 @@ public class TaskManager {
 	 * @param days  - the boolean array representing the days of the week that the
 	 *              habit is planned to be done on
 	 */
-	public void addFromGUIToDB(String habit, boolean[] days) {
-		Habit h = new Habit(habit, daysToGoal(days), days);
+	public void addFromGUIToDB(String habit, boolean[] days, int[] goals) {
+		Habit h = new Habit(habit, daysToGoal(days), days, goals);
 		db.addHabit(h);
 	}
 
-//--------------------------------METHODS HANDLING HABIT STATISTICS--------------------------------
+//--------------------------------DATABASE MANIPULATION METHODS--------------------------------------------------------------------
 	/**
 	 * int array where a[0] = days completed, days[1] = days missed, days[2] = days to occur
 	 *
 	 */
-	public void updateDatabaseStats(Habit habit, int[] days) {
+	public void updateWeeklyStats(Habit habit, int[] days) {
 		db.updateWeeklyStat(habit, arrToString(days));
+	}
+	
+	public void updateOverallStats(Habit habit, int[] days) {
+		db.updateOverallStat(habit, arrToString(days));
 	}
 	
 	/**
@@ -55,8 +61,10 @@ public class TaskManager {
 		return db.getOverallStat(habit);
 	}
 
-
-//-----------------------------------------HELPER METHODS--------------------------------------
+	public ArrayList<Habit> getHabits(){
+		return db.getHabits();
+	}
+//-----------------------------------------HELPER METHODS-------------------------------------------------------------------
 
 	/**
 	 * arrToString - changes the integer arr into a string 
@@ -66,7 +74,7 @@ public class TaskManager {
 	private String arrToString(int[] arr) {
 		String s = "";
 		for(int i : arr) {
-			s += i;
+			s += i + " ";
 		}
 		
 		return s;
