@@ -2,7 +2,6 @@ package application;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 /**
  * DataBase - a class that handles pulling and pushing data from and to a
@@ -38,7 +37,7 @@ public class Database {
 
 			statement = connection.createStatement();
 			String sql = "CREATE TABLE IF NOT EXISTS HABITS " + " (habit VARCHAR(255), " + " goal INTEGER, "
-					+ " days VARCHAR(7), " + " weekly VARCHAR(15)," + " overall VARCHAR(15))";
+					+ " days VARCHAR(7), " + " status VARCHAR(7), " + " weekly VARCHAR(5)," + " overall VARCHAR(15))";
 			statement.executeUpdate(sql);
 
 		} catch (SQLException e) {
@@ -65,12 +64,13 @@ public class Database {
 		String habit = info[0];
 		int goal = Integer.parseInt(info[1]);
 		String days = info[2];
+		String status = info[3];
 
 		try {
 			// gets a connection
 			statement = connection.createStatement();
 			String sql = "INSERT INTO HABITS " + "VALUES ('" + habit + "', '" + goal + "', '" + days
-					+ "', '000', '000')";
+					+ "', '" + status + "', '000', '000')";
 			statement.executeUpdate(sql);
 
 		} catch (SQLException e) {
@@ -106,6 +106,10 @@ public class Database {
 	 *             is the days still to come
 	 */
 	public void updateWeeklyStat(Habit h, String stat) {
+		int[] test = stringToIntArr(stat);
+		if(test.length != 3) {
+			throw new IllegalArgumentException("The value provided is not valid");
+		}
 		try {
 			statement = connection.createStatement();
 			String sql = "UPDATE HABITS " + "SET weekly = '" + stat + "' WHERE habit LIKE '%" + h.getHabit() + "%'";
@@ -123,7 +127,12 @@ public class Database {
 	 *             charAt(0) is the days completed and chatAt(1) is the days missed
 	 */
 	public void updateOverallStat(Habit h, String stat) {
-
+		//to make sure that an invalid argument cannot reach the code
+		int[] test = stringToIntArr(stat);
+		if(test.length != 2) {
+			throw new IllegalArgumentException("The value provided is not valid");
+		}
+		
 		try {
 			statement = connection.createStatement();
 			String sql = "UPDATE HABITS " + "SET overall = '" + stat + "' WHERE habit LIKE '%" + h.getHabit() + "%'";
@@ -151,26 +160,17 @@ public class Database {
 	 */
 	public ArrayList<Habit> getHabits() {
 		ArrayList<Habit> habits = new ArrayList<Habit>();
-		String sql = "SELECT habit, goal, days FROM HABITS";
+		String sql = "SELECT habit, goal, days, status FROM HABITS";
 		try {
 			ResultSet rs = statement.executeQuery(sql);
 
 			while (rs.next()) {
 				String habit = rs.getString("habit");
-				String goal = rs.getString("goal");
+				boolean[] goal = stringToBoolArr(rs.getString("goal"));
 				int days = rs.getInt("days");
+				int[] status = stringToIntArr(rs.getString("status"));
 
-				boolean[] daysBool = new boolean[7];
-
-				for (int i = 0; i < goal.length(); i++) {
-					if (goal.charAt(i) == '1') {
-						daysBool[i] = true;
-					} else {
-						daysBool[i] = false;
-					}
-				}
-
-				Habit h = new Habit(habit, days, daysBool);
+				Habit h = new Habit(habit, days, goal, status);
 				habits.add(h);
 			}
 
@@ -199,9 +199,7 @@ public class Database {
 			String statString = rs.getString("weekly");
 
 			// puts the values into the array
-			stats[0] = charToInt(statString.charAt(0));
-			stats[1] = charToInt(statString.charAt(1));
-			stats[2] = charToInt(statString.charAt(2));
+			stats = stringToIntArr(statString);
 
 			return stats;
 
@@ -239,6 +237,8 @@ public class Database {
 
 		return stats;
 	}
+	
+	
 
 	/**
 	 * printValues - prints the values into the the console
@@ -270,14 +270,31 @@ public class Database {
 	 * @return the int array containing the values from the string;
 	 */
 	private int[] stringToIntArr(String s) {
-		String[] sArr = s.split(" ");
-		int[] intArr = new int[sArr.length];
+		try {
+			String[] sArr = s.split(" ");
+			int[] intArr = new int[sArr.length];
 
-		for (int i = 0; i < intArr.length; i++) {
-			intArr[i] = Integer.parseInt(sArr[i]);
+			for (int i = 0; i < intArr.length; i++) {
+				intArr[i] = Integer.parseInt(sArr[i]);
+			}
+
+			return intArr;
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
 		}
-
-		return intArr;
+		return null;
+	}
+	
+	private boolean[] stringToBoolArr(String goal) {
+		boolean[] daysBool = new boolean[7];
+		for (int i = 0; i < goal.length(); i++) {
+			if (goal.charAt(i) == '1') {
+				daysBool[i] = true;
+			} else {
+				daysBool[i] = false;
+			}
+		}
+		return daysBool;
 	}
 
 }
