@@ -34,7 +34,7 @@ public class Database {
 			} else {
 				System.out.println("A database already exists");
 			}
-
+			//
 			statement = connection.createStatement();
 			String sql = "CREATE TABLE IF NOT EXISTS HABITS " + " (habit VARCHAR(255), " + " goal INTEGER, "
 					+ " days VARCHAR(7), " + " status VARCHAR(7), " + " weekly VARCHAR(5)," + " overall VARCHAR(15))";
@@ -69,8 +69,8 @@ public class Database {
 		try {
 			// gets a connection
 			statement = connection.createStatement();
-			String sql = "INSERT INTO HABITS " + "VALUES ('" + habit + "', '" + goal + "', '" + days
-					+ "', '" + status + "', '000', '000')";
+			String sql = "INSERT INTO HABITS " + "VALUES ('" + habit + "', '" + goal + "', '" + days + "', '" + status
+					+ "', '000', '000')";
 			statement.executeUpdate(sql);
 
 		} catch (SQLException e) {
@@ -98,6 +98,52 @@ public class Database {
 	}
 
 	/**
+	 * updateHabit - gets the habit you want from the database and changes the
+	 * string of the habit
+	 * 
+	 * @param habit - the String that you would like to change the current string in
+	 *              habit to
+	 */
+	public void updateHabit(Habit h, String habit) {
+		try {
+			statement = connection.createStatement();
+			String sql = "UPDATE HABITS " + "SET habit = '" + habit + "' WHERE habit LIKE '%" + h.getHabit() + "%'";
+			statement.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * updateStatus -updates the status of the habit within the database
+	 * @param h - the habit that you like to update
+	 * @param status - the new status that you would like to pass into the database
+	 */
+	public void updateStatus(Habit h, String status) {
+		try {
+			statement = connection.createStatement();
+			String sql = "UPDATE HABITS " + "SET status = '" + status + "' WHERE habit LIKE '%" + h.getHabit() + "%'";
+			statement.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * updateDays - updates the days of the habit within the database
+	 * @param h - the habit that you would like to change
+	 * @param days - the new string of days that you would like to update days to
+	 */
+	public void updateDays(Habit h, String days) {
+		try {
+			statement = connection.createStatement();
+			String sql = "UPDATE HABITS " + "SET days = '" + days + "' WHERE habit LIKE '%" + h.getHabit() + "%'";
+			statement.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	/**
 	 * updateWeeklyStat - changes the value within the DB table for the column
 	 * 'weekly' which holds on to tthe stats of the week
 	 * 
@@ -107,7 +153,7 @@ public class Database {
 	 */
 	public void updateWeeklyStat(Habit h, String stat) {
 		int[] test = stringToIntArr(stat);
-		if(test.length != 3) {
+		if (test.length != 3) {
 			throw new IllegalArgumentException("The value provided is not valid");
 		}
 		try {
@@ -125,17 +171,30 @@ public class Database {
 	 * 
 	 * @param stat - should have two Integer characters in the string where
 	 *             charAt(0) is the days completed and chatAt(1) is the days missed
+	 * 
+	 * 
 	 */
 	public void updateOverallStat(Habit h, String stat) {
-		//to make sure that an invalid argument cannot reach the code
+		// to make sure that an invalid argument cannot reach the code
 		int[] test = stringToIntArr(stat);
-		if(test.length != 2) {
+		if (test.length != 2) {
 			throw new IllegalArgumentException("The value provided is not valid");
 		}
-		
+
 		try {
 			statement = connection.createStatement();
 			String sql = "UPDATE HABITS " + "SET overall = '" + stat + "' WHERE habit LIKE '%" + h.getHabit() + "%'";
+			statement.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateGoal(Habit h, int i) {
+		// to make sure that an invalid argument cannot reach the code
+		try {
+			statement = connection.createStatement();
+			String sql = "UPDATE HABITS " + "SET goal = '" + i + "' WHERE habit LIKE '%" + h.getHabit() + "%'";
 			statement.executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -237,8 +296,34 @@ public class Database {
 
 		return stats;
 	}
-	
-	
+
+	/**
+	 * getStatus - Gets the status of the habit
+	 * 
+	 * @param h - the habit that you are looking for in the database
+	 * @return an int[] where the index represents the days of week and the
+	 *         corresponding number tells the status of the habit of that day
+	 */
+	public int[] getStatus(Habit h) {
+		int stats[] = new int[3];
+		try {
+			// gets the data from the database
+			statement = connection.createStatement();
+			String sql = "SELECT stat " + "FROM HABITS" + " WHERE habit LIKE '%" + h.getHabit() + "%'";
+			ResultSet rs = statement.executeQuery(sql);
+
+			String statString = rs.getString("overall");
+
+			// puts the values into the array
+			stats = stringToIntArrStatus(statString);
+
+			return stats;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return stats;
+	}
 
 	/**
 	 * printValues - prints the values into the the console
@@ -269,6 +354,20 @@ public class Database {
 	 * @param s - the string that you would like to convert into a int array
 	 * @return the int array containing the values from the string;
 	 */
+	private int[] stringToIntArrStatus(String s) {
+		try {
+			int[] intArr = new int[7];
+
+			for (int i = 0; i < 7; i++) {
+				intArr[i] = charToInt(s.charAt(i));
+			}
+			return intArr;
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	private int[] stringToIntArr(String s) {
 		try {
 			String[] sArr = s.split(" ");
@@ -284,8 +383,8 @@ public class Database {
 		}
 		return null;
 	}
-	
-	private boolean[] stringToBoolArr(String goal) {
+
+	public boolean[] stringToBoolArr(String goal) {
 		boolean[] daysBool = new boolean[7];
 		for (int i = 0; i < goal.length(); i++) {
 			if (goal.charAt(i) == '1') {
@@ -295,6 +394,17 @@ public class Database {
 			}
 		}
 		return daysBool;
+	}
+
+	public static void main(String[] args) {
+		Database db = new Database("New db");
+		boolean[] dow = { true, true, true, false, false, false, false };
+		int[] completed = { 0, 0, 0, 0, 1, 0, 2 };
+
+		Habit h = new Habit("Go on a walk everyday", 3, dow, completed);
+
+		db.printValues();
+
 	}
 
 }

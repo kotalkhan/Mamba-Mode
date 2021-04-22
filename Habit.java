@@ -16,7 +16,7 @@ public class Habit {
 	 *               the habit done
 	 * @param dOW    - the days of the week that the user has set
 	 * @param status - an int array where the index represents the days and Habit
-	 *               where 0 = missed, 1 = completed, 2 = still to come
+	 *               where 0 = missed, 1 = completed, 2 = still to come, 3 = nothing planned
 	 */
 	public Habit(String habit, int goal, boolean[] dOW, int[] status) {
 		this.habit = habit;
@@ -88,7 +88,7 @@ public class Habit {
 		return "Habit: " + habit + " | Days of the week: " + getHabitInfo()[1] + " | Goal: " + goal;
 	}
 
-	private String booleanArrToString(boolean[] bArr) {
+	public String booleanArrToString(boolean[] bArr) {
 		String s = "";
 
 		for (int i = 0; i < 7; i++) {
@@ -104,9 +104,12 @@ public class Habit {
 
 	private String intArrToString(int[] iArr) {
 		String s = "";
-
+		
 		for (int i = 0; i < 7; i++) {
-			s += iArr[i];
+			System.out.println(iArr[i]);
+
+			String number = iArr[i]+"";
+			s += number;
 		}
 		return s;
 	}
