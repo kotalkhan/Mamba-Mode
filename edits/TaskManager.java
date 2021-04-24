@@ -74,7 +74,7 @@ public class TaskManager {
 	}
 	
 	/**
-	 * updateDays - changes the status in the database and the instance variable
+	 * updateDays - changes the days in the database and the instance variable
 	 * 
 	 * @param habit - the habit that you would like to change the habit of
 	 * @param days  - the integer array that stores which days the habit has been
@@ -96,6 +96,10 @@ public class TaskManager {
 		db.updateGoal(habit, goal);
 	}
 	
+	public void deleteHabit(Habit h) {
+		db.deleteHabit(h);
+	}
+	
 	/**
 	 * int array where a[0] = days completed, days[1] = days missed, days[2] = days
 	 * to occur
@@ -114,6 +118,7 @@ public class TaskManager {
 	public int[] getOverallHabitStats(Habit habit) {
 		return db.getOverallStat(habit);
 	}
+
 
 	/**
 	 * 
