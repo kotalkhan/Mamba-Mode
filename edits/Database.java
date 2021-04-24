@@ -227,7 +227,7 @@ public class Database {
 				String habit = rs.getString("habit");
 				boolean[] goal = stringToBoolArr(rs.getString("goal"));
 				int days = rs.getInt("days");
-				int[] status = stringToIntArr(rs.getString("status"));
+				int[] status = stringToIntArrStatus(rs.getString("status"));
 
 				Habit h = new Habit(habit, days, goal, status);
 				habits.add(h);
