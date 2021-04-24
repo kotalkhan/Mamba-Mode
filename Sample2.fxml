@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="550.0" prefWidth="850.0" style="-fx-background-color: #552583;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
+<BorderPane prefHeight="550.0" prefWidth="850.0" style="-fx-background-color: #552583;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
    <top>
       <AnchorPane prefHeight="78.0" prefWidth="850.0" BorderPane.alignment="CENTER">
          <children>
@@ -28,4 +32,22 @@
          </children>
       </AnchorPane>
    </top>
+   <center>
+      <BarChart BorderPane.alignment="CENTER">
+        <xAxis>
+          <CategoryAxis label="Habit Status" side="BOTTOM" tickLabelFill="#fdb927">
+               <effect>
+                  <ColorAdjust brightness="1.0" contrast="-1.0" hue="1.0" saturation="1.0" />
+               </effect>
+            </CategoryAxis>
+        </xAxis>
+        <yAxis>
+          <NumberAxis label="# of Habits" side="LEFT">
+               <effect>
+                  <ColorAdjust brightness="1.0" />
+               </effect>
+            </NumberAxis>
+        </yAxis>
+      </BarChart>
+   </center>
 </BorderPane>
