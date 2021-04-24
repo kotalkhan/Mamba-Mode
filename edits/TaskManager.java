@@ -60,7 +60,7 @@ public class TaskManager {
 	public void updateHabit(Habit habit1, String newHabit) {
 		db.updateHabit(habit1, newHabit);
 	}
-
+	
 	/**
 	 * updateStatus - changes the status in the database and the instance variable
 	 * 
