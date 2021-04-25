@@ -21,11 +21,9 @@ public class Habit {
 	 */
 	public Habit(String habit, int goal, boolean[] dOW, int[] status) {
 		this.habit = habit;
-		this.daysOfWeek = dOW;
 		this.goal = goal;
+		this.daysOfWeek = dOW;
 		this.status = status;
-		
-		//new
 		days = boolToStr(dOW);
 	}
 
@@ -51,11 +49,6 @@ public class Habit {
 
 	public void editStatus(int[] status) {
 		this.status = status;
-	}
-	
-	//new
-	public void editNewHabit(String newHabit) {
-		this.habit = newHabit;
 	}
 
 	public String getHabit() {
@@ -84,30 +77,30 @@ public class Habit {
 		String[] info = new String[4];
 		String days = booleanArrToString(daysOfWeek);
 		String weeklyStatus = intArrToString(status);
-
+		
 		info[0] = habit;
-		info[1] = days;
-		info[2] = String.valueOf(goal);
+		info[1] = String.valueOf(goal);
+		info[2] = days;
 		info[3] = weeklyStatus;
 
 		return info;
 	}
 
 	public String toString() {
-		return "Habit: " + habit + " | Days of the week: " + getHabitInfo()[1] + " | Goal: " + goal;
+		return "Habit: " + habit + " | Days of the week: " + getHabitInfo()[2] + " | Goal: " + goal;
 	}
 
-	public String booleanArrToString(boolean[] bArr) {
+	private String booleanArrToString(boolean[] bArr) {
 		String s = "";
 
 		for (int i = 0; i < 7; i++) {
+
 			if (bArr[i] == true) {
 				s += "1";
 			} else {
 				s += "0";
 			}
 		}
-
 		return s;
 	}
 

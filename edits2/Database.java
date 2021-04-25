@@ -66,6 +66,9 @@ public class Database {
 		String days = info[2];
 		String status = info[3];
 
+		
+		System.out.println("GoalDB: " + goal);
+		System.out.println("DaysDB: " + days);
 		try {
 			// gets a connection
 			statement = connection.createStatement();
@@ -106,9 +109,11 @@ public class Database {
 	 */
 	public void updateHabit(Habit h, String habit) {
 		try {
+			
 			statement = connection.createStatement();
 			String sql = "UPDATE HABITS " + "SET habit = '" + habit + "' WHERE habit LIKE '%" + h.getHabit() + "%'";
 			statement.executeUpdate(sql);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -137,7 +142,7 @@ public class Database {
 	public void updateDays(Habit h, String days) {
 		try {
 			statement = connection.createStatement();
-			String sql = "UPDATE HABITS " + "SET days = '" + days + "' WHERE habit LIKE '%" + h.getHabit() + "%'";
+			String sql = "UPDATE HABITS " + "SET days = '" + days + "' WHERE habit = '" + h.getHabit() + "'";
 			statement.executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -222,14 +227,17 @@ public class Database {
 		String sql = "SELECT habit, goal, days, status FROM HABITS";
 		try {
 			ResultSet rs = statement.executeQuery(sql);
-
+			
+			
+			
 			while (rs.next()) {
 				String habit = rs.getString("habit");
-				boolean[] goal = stringToBoolArr(rs.getString("goal"));
-				int days = rs.getInt("days");
+				int goal = rs.getInt("goal");
+				boolean[] days = stringToBoolArr(rs.getString("days"));
 				int[] status = stringToIntArrStatus(rs.getString("status"));
+				
 
-				Habit h = new Habit(habit, days, goal, status);
+				Habit h = new Habit(habit, goal, days, status);
 				habits.add(h);
 			}
 
@@ -330,7 +338,6 @@ public class Database {
 	 */
 	public void printValues() {
 		ArrayList<Habit> h = getHabits();
-
 		for (Habit habit : h) {
 			System.out.println(habit);
 		}
@@ -394,17 +401,6 @@ public class Database {
 			}
 		}
 		return daysBool;
-	}
-
-	public static void main(String[] args) {
-		Database db = new Database("New db");
-		boolean[] dow = { true, true, true, false, false, false, false };
-		int[] completed = { 0, 0, 0, 0, 1, 0, 2 };
-
-		Habit h = new Habit("Go on a walk everyday", 3, dow, completed);
-
-		db.printValues();
-
 	}
 
 }

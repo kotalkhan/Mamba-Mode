@@ -82,7 +82,7 @@ public class TaskManager {
 	 */
 	public void updateDays(Habit habit, boolean[] days) {
 		habit.editDaysOfWeek(days);
-		db.updateStatus(habit, habit.booleanArrToString(days));
+		db.updateDays(habit, booleanArrToString(days));
 	}
 
 	/**
@@ -154,6 +154,20 @@ public class TaskManager {
 	}
 	
 
+	private String booleanArrToString(boolean[] bArr) {
+		String s = "";
+
+		for (int i = 0; i < 7; i++) {
+
+			if (bArr[i] == true) {
+				s += "1";
+			} else {
+				s += "0";
+			}
+		}
+		return s;
+	}
+	
 	/**
 	 * daysToGoals - takes in a boolean array and counts the number of true values
 	 * in the boolean
