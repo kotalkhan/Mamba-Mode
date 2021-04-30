@@ -1,20 +1,31 @@
 package application;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
-public class SampleController {
+public class SampleController{ // implements Initializable {
+	
+	//DB here
+	TaskManager tm = new TaskManager("tm");
 
     @FXML
     private Button btn1;
@@ -134,36 +145,45 @@ public class SampleController {
     }
     
     @FXML
-    private TextField habit;
+    private TableView<Habit> tb;
+    
+    @FXML
+    private TableColumn<Habit, String> su;
+    
+    @FXML
+    private TableColumn<Habit, String> mo;
 
     @FXML
-    private CheckBox sun;
+    private TableColumn<Habit, String> tu;
 
     @FXML
-    private CheckBox mon;
+    private TableColumn<Habit, String> we;
 
     @FXML
-    private CheckBox tue;
+    private TableColumn<Habit, String> th;
 
     @FXML
-    private CheckBox wed;
+    private TableColumn<Habit, String> fr;
 
     @FXML
-    private CheckBox thu;
-
-    @FXML
-    private CheckBox fri;
-
-    @FXML
-    private CheckBox sat;
-
-    @FXML
-    void sendToAdd(ActionEvent event) {
-    	//get id, send to DB, clear
-    	Boolean [] week = new Boolean [6];
-     	if(sun.isSelected()) {
-    		week[0] = true;
-    	}
+    private TableColumn<Habit, String> sa;
+    
+    /*
+    public ObservableList<Habit> getHabits()
+    {
+    	ObservableList<Habit> result = FXCollections.observableArrayList(tm.getHabits());
+    	return result;
     }
     
+    public void initialize(URL url, ResourceBundle rb) {
+    	//set columns
+    	su.setCellValueFactory(new PropertyValueFactory<Habit, String>("habit"));
+    	mo.setCellValueFactory(new PropertyValueFactory<Habit, String>("habit"));
+    	tu.setCellValueFactory(new PropertyValueFactory<Habit, String>("habit"));
+    	we.setCellValueFactory(new PropertyValueFactory<Habit, String>("habit"));
+    	th.setCellValueFactory(new PropertyValueFactory<Habit, String>("habit"));
+    	fr.setCellValueFactory(new PropertyValueFactory<Habit, String>("habit"));
+    	sa.setCellValueFactory(new PropertyValueFactory<Habit, String>("habit"));
+    }
+    */
 }

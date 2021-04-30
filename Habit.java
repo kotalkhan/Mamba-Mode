@@ -8,6 +8,7 @@ public class Habit {
 	private boolean[] daysOfWeek;
 	private int goal;
 	private int[] status;
+	private String days;
 
 	/**
 	 * 
@@ -16,13 +17,14 @@ public class Habit {
 	 *               the habit done
 	 * @param dOW    - the days of the week that the user has set
 	 * @param status - an int array where the index represents the days and Habit
-	 *               where 0 = missed, 1 = completed, 2 = still to come, 3 = nothing planned
+	 *               where 0 = missed, 1 = completed, 2 = still to come
 	 */
 	public Habit(String habit, int goal, boolean[] dOW, int[] status) {
 		this.habit = habit;
-		this.daysOfWeek = dOW;
 		this.goal = goal;
+		this.daysOfWeek = dOW;
 		this.status = status;
+		days = boolToStr(dOW);
 	}
 
 	/**
@@ -75,44 +77,50 @@ public class Habit {
 		String[] info = new String[4];
 		String days = booleanArrToString(daysOfWeek);
 		String weeklyStatus = intArrToString(status);
-
+		
 		info[0] = habit;
-		info[1] = days;
-		info[2] = String.valueOf(goal);
+		info[1] = String.valueOf(goal);
+		info[2] = days;
 		info[3] = weeklyStatus;
 
 		return info;
 	}
 
 	public String toString() {
-		return "Habit: " + habit + " | Days of the week: " + getHabitInfo()[1] + " | Goal: " + goal;
+		return "Habit: " + habit + " | Days of the week: " + getHabitInfo()[2] + " | Goal: " + goal;
 	}
 
-	public String booleanArrToString(boolean[] bArr) {
+	private String booleanArrToString(boolean[] bArr) {
 		String s = "";
 
 		for (int i = 0; i < 7; i++) {
+
 			if (bArr[i] == true) {
 				s += "1";
 			} else {
 				s += "0";
 			}
 		}
-
 		return s;
 	}
 
 	private String intArrToString(int[] iArr) {
 		String s = "";
-		
-		for (int i = 0; i < 7; i++) {
-			System.out.println(iArr[i]);
 
-			String number = iArr[i]+"";
-			s += number;
+		for (int i = 0; i < 7; i++) {
+			s += iArr[i];
 		}
 		return s;
 	}
 
-	
+	public String boolToStr(boolean[] dOW) {
+		String result = "";
+		String [] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+			
+		for(int i = 0; i < daysOfWeek.length; i++) {
+			if(daysOfWeek[i] == true)
+				result += days[i] + ", ";
+		}
+		return result;  	
+    }
 }

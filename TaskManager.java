@@ -74,7 +74,7 @@ public class TaskManager {
 	}
 	
 	/**
-	 * updateDays - changes the status in the database and the instance variable
+	 * updateDays - changes the days in the database and the instance variable
 	 * 
 	 * @param habit - the habit that you would like to change the habit of
 	 * @param days  - the integer array that stores which days the habit has been
@@ -82,7 +82,7 @@ public class TaskManager {
 	 */
 	public void updateDays(Habit habit, boolean[] days) {
 		habit.editDaysOfWeek(days);
-		db.updateStatus(habit, habit.booleanArrToString(days));
+		db.updateDays(habit, booleanArrToString(days));
 	}
 
 	/**
@@ -94,6 +94,10 @@ public class TaskManager {
 	public void updateGoal(Habit habit, int goal) {
 		habit.editGoal(goal);
 		db.updateGoal(habit, goal);
+	}
+	
+	public void deleteHabit(Habit h) {
+		db.deleteHabit(h);
 	}
 	
 	/**
@@ -114,6 +118,7 @@ public class TaskManager {
 	public int[] getOverallHabitStats(Habit habit) {
 		return db.getOverallStat(habit);
 	}
+
 
 	/**
 	 * 
@@ -149,6 +154,20 @@ public class TaskManager {
 	}
 	
 
+	private String booleanArrToString(boolean[] bArr) {
+		String s = "";
+
+		for (int i = 0; i < 7; i++) {
+
+			if (bArr[i] == true) {
+				s += "1";
+			} else {
+				s += "0";
+			}
+		}
+		return s;
+	}
+	
 	/**
 	 * daysToGoals - takes in a boolean array and counts the number of true values
 	 * in the boolean

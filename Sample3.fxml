@@ -51,15 +51,15 @@
       </AnchorPane>
    </top>
    <bottom>
-      <TableView prefHeight="275.0" prefWidth="850.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="tb" prefHeight="275.0" prefWidth="850.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="121.4" text="Sunday" />
-          <TableColumn prefWidth="121.4" text="Monday" />
-            <TableColumn prefWidth="121.4" text="Tuesday" />
-            <TableColumn prefWidth="121.4" text="Wednesday" />
-            <TableColumn prefWidth="121.4" text="Thursday" />
-            <TableColumn prefWidth="121.4" text="Friday" />
-            <TableColumn prefWidth="121.4" text="Saturday" />
+          <TableColumn fx:id="su" prefWidth="121.4" text="Sunday" />
+          <TableColumn fx:id="mo" prefWidth="121.4" text="Monday" />
+            <TableColumn fx:id="tu" prefWidth="121.4" text="Tuesday" />
+            <TableColumn fx:id="we" prefWidth="121.4" text="Wednesday" />
+            <TableColumn fx:id="th" prefWidth="121.4" text="Thursday" />
+            <TableColumn fx:id="fr" prefWidth="121.4" text="Friday" />
+            <TableColumn fx:id="sa" prefWidth="121.4" text="Saturday" />
         </columns>
       </TableView>
    </bottom>

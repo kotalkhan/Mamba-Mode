@@ -1,20 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="550.0" prefWidth="850.0" style="-fx-background-color: #552583;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
-   <top>
-      <AnchorPane prefHeight="92.0" prefWidth="850.0" BorderPane.alignment="CENTER">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" style="-fx-background-color: #552583;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.editController">
+   <children>
+      <Text fill="#fdb927" layoutX="32.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Habit" wrappingWidth="135.73674631118774" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <font>
+            <Font name="SansSerif Bold Italic" size="24.0" />
+         </font>
+      </Text>
+      <TableView fx:id="table" layoutX="20.0" layoutY="140.0" onMouseClicked="#getSelected" prefHeight="270.0" prefWidth="415.0">
+        <columns>
+          <TableColumn fx:id="habitColumn" prefWidth="207.20001602172852" text="Habit" />
+          <TableColumn fx:id="daysColumn" minWidth="0.0" prefWidth="208.7999725341797" text="Days" />
+        </columns>
+      </TableView>
+      <VBox layoutX="460.0" layoutY="140.0" prefHeight="270.0" prefWidth="370.0" spacing="20.0">
          <children>
-            <Text fill="#fdb927" layoutX="22.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Habit" wrappingWidth="135.73674631118774" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <Label text="Habit:" textFill="WHITE">
                <font>
-                  <Font name="SansSerif Bold Italic" size="24.0" />
+                  <Font name="SansSerif Bold" size="20.0" />
                </font>
-            </Text>
+               <VBox.margin>
+                  <Insets left="150.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="habitE" />
+            <Label text="Number of Days:" textFill="WHITE">
+               <font>
+                  <Font name="SansSerif Bold" size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="105.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="24.0" prefWidth="498.0" spacing="20.0">
+               <children>
+                  <CheckBox fx:id="sunE" mnemonicParsing="false" text="Sunday" textFill="#f4f4f4">
+                     <font>
+                        <Font name="SansSerif Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox fx:id="monE" mnemonicParsing="false" text="Monday" textFill="#f4f4f4">
+                     <font>
+                        <Font name="SansSerif Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox fx:id="tueE" mnemonicParsing="false" text="Tuesday" textFill="#f4f4f4">
+                     <font>
+                        <Font name="SansSerif Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox fx:id="wedE" mnemonicParsing="false" text="Wednesday" textFill="#f4f4f4">
+                     <font>
+                        <Font name="SansSerif Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="24.0" prefWidth="498.0" spacing="20.0">
+               <children>
+                  <CheckBox fx:id="thuE" mnemonicParsing="false" text="Thursday" textFill="#f4f4f4">
+                     <font>
+                        <Font name="SansSerif Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox fx:id="friE" mnemonicParsing="false" text="Friday" textFill="#f4f4f4">
+                     <font>
+                        <Font name="SansSerif Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox fx:id="satE" mnemonicParsing="false" text="Saturday" textFill="#f4f4f4">
+                     <font>
+                        <Font name="SansSerif Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </HBox>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#sendToEdit" text="Confirm" textFill="#fdb927">
+               <font>
+                  <Font name="SansSerif Bold" size="14.0" />
+               </font>
+               <padding>
+                  <Insets bottom="2.0" left="30.0" right="30.0" top="2.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets left="125.0" />
+               </VBox.margin>
+            </Button>
          </children>
-      </AnchorPane>
-   </top>
-</BorderPane>
+      </VBox>
+   </children>
+</AnchorPane>
