@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="550.0" prefWidth="850.0" style="-fx-background-color: #552583;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
+<BorderPane prefHeight="550.0" prefWidth="850.0" style="-fx-background-color: #552583;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
    <top>
       <AnchorPane prefHeight="78.0" prefWidth="850.0" BorderPane.alignment="CENTER">
          <children>
@@ -25,7 +27,28 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
+            <Button fx:id="GetDatabtn" layoutX="399.0" layoutY="54.0" mnemonicParsing="false" onAction="#displayData" text="Get Data" />
          </children>
       </AnchorPane>
    </top>
+   <left>
+      <Label fx:id="donelbl" text="Done: " textFill="#fdb927" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold Italic" size="48.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets left="200.0" right="23.0" />
+         </BorderPane.margin>
+      </Label>
+   </left>
+   <right>
+      <Label fx:id="missedlbl" text="Missed: " textFill="#fdb927" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold Italic" size="48.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets right="200.0" />
+         </BorderPane.margin>
+      </Label>
+   </right>
 </BorderPane>

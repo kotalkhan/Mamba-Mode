@@ -1,31 +1,24 @@
 package application;
 
 import java.io.IOException;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 
-public class SampleController{ // implements Initializable {
-	
-	//DB here
-	TaskManager tm = new TaskManager("tm");
+public class SampleController 
+{
 
     @FXML
     private Button btn1;
@@ -33,6 +26,7 @@ public class SampleController{ // implements Initializable {
     @FXML
     private Button btn2;
 
+    
     @FXML
     public void home2habits() throws Exception {
     	Parent root = FXMLLoader.load(getClass().getResource("Sample3.fxml"));
@@ -45,7 +39,34 @@ public class SampleController{ // implements Initializable {
     	Parent root = FXMLLoader.load(getClass().getResource("Sample2.fxml"));
     	Stage window = (Stage) btn1.getScene().getWindow();
     	window.setScene(new Scene(root, 850, 550));
+    	
+    	
     }
+    
+    @FXML Label donelbl;
+    
+    @FXML Label missedlbl;
+    
+    
+    
+    @FXML
+    public void displayData() 
+    {
+    	Statistics s  = new Statistics();
+    	TaskManager t = new TaskManager("tm");
+    	s.updateCounters(t);
+    	int done = s.getNumberDone();
+    	int missed = s.getMissed();    	
+    	    	
+    	
+    	donelbl.setText("Done: " + done);
+    	missedlbl.setText("Missed: " + missed);
+    	
+    }
+    
+    @FXML Button GetDatabtn;
+	
+   
 
     @FXML
     private Button btn3;
@@ -85,6 +106,8 @@ public class SampleController{ // implements Initializable {
     	Parent root = FXMLLoader.load(getClass().getResource("Sample2.fxml"));
     	Stage window = (Stage) btn6.getScene().getWindow();
     	window.setScene(new Scene(root, 850, 550));
+    	
+    	
     }
     
     @FXML
@@ -145,45 +168,37 @@ public class SampleController{ // implements Initializable {
     }
     
     @FXML
-    private TableView<Habit> tb;
-    
-    @FXML
-    private TableColumn<Habit, String> su;
-    
-    @FXML
-    private TableColumn<Habit, String> mo;
+    private TextField habit;
 
     @FXML
-    private TableColumn<Habit, String> tu;
+    private CheckBox sun;
 
     @FXML
-    private TableColumn<Habit, String> we;
+    private CheckBox mon;
 
     @FXML
-    private TableColumn<Habit, String> th;
+    private CheckBox tue;
 
     @FXML
-    private TableColumn<Habit, String> fr;
+    private CheckBox wed;
 
     @FXML
-    private TableColumn<Habit, String> sa;
-    
-    /*
-    public ObservableList<Habit> getHabits()
-    {
-    	ObservableList<Habit> result = FXCollections.observableArrayList(tm.getHabits());
-    	return result;
+    private CheckBox thu;
+
+    @FXML
+    private CheckBox fri;
+
+    @FXML
+    private CheckBox sat;
+
+    @FXML
+    void sendToAdd(ActionEvent event) {
+    	//get id, send to DB, clear
+    	Boolean [] week = new Boolean [6];
+     	if(sun.isSelected()) {
+    		week[0] = true;
+    	}
     }
+
     
-    public void initialize(URL url, ResourceBundle rb) {
-    	//set columns
-    	su.setCellValueFactory(new PropertyValueFactory<Habit, String>("habit"));
-    	mo.setCellValueFactory(new PropertyValueFactory<Habit, String>("habit"));
-    	tu.setCellValueFactory(new PropertyValueFactory<Habit, String>("habit"));
-    	we.setCellValueFactory(new PropertyValueFactory<Habit, String>("habit"));
-    	th.setCellValueFactory(new PropertyValueFactory<Habit, String>("habit"));
-    	fr.setCellValueFactory(new PropertyValueFactory<Habit, String>("habit"));
-    	sa.setCellValueFactory(new PropertyValueFactory<Habit, String>("habit"));
-    }
-    */
 }
