@@ -51,4 +51,14 @@
          </BorderPane.margin>
       </Label>
    </right>
+   <bottom>
+      <Label fx:id="totallbl" text="Total Habits: " textFill="#fdb927" BorderPane.alignment="BOTTOM_CENTER">
+         <font>
+            <Font name="System Bold Italic" size="48.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets bottom="50.0" />
+         </BorderPane.margin>
+      </Label>
+   </bottom>
 </BorderPane>

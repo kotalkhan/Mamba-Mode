@@ -47,6 +47,9 @@ public class SampleController
     
     @FXML Label missedlbl;
     
+    @FXML Label totallbl;
+    
+    
     
     
     @FXML
@@ -61,6 +64,8 @@ public class SampleController
     	
     	donelbl.setText("Done: " + done);
     	missedlbl.setText("Missed: " + missed);
+    	
+    	totallbl.setText("Total Habits: " + t.getHabits().size());
     	
     }
     
