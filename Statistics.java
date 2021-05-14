@@ -5,7 +5,11 @@ public class Statistics {
 		public int done;
 		public int missed;
 			
-		
+		/**
+		 * updateCounters - updates values for counting done and missed
+		 * 
+		 * @param TaskManager - the TaskManager object that holds the Habit data
+		 */
 		public void updateCounters(TaskManager t) {
 			
 			done = 0;
@@ -15,6 +19,8 @@ public class Statistics {
 				done += t.getOverallHabitStats(h)[0];
 				missed += t.getOverallHabitStats(h)[1];
 			}
+			
+			
 		
 		}
 		
