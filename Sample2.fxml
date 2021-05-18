@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="550.0" prefWidth="850.0" style="-fx-background-color: #552583;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
+<BorderPane prefHeight="550.0" prefWidth="850.0" style="-fx-background-color: #552583;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
    <top>
       <AnchorPane prefHeight="78.0" prefWidth="850.0" BorderPane.alignment="CENTER">
          <children>
@@ -27,7 +27,6 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="GetDatabtn" layoutX="399.0" layoutY="54.0" mnemonicParsing="false" onAction="#displayData" text="Get Data" />
          </children>
       </AnchorPane>
    </top>
@@ -41,16 +40,6 @@
          </BorderPane.margin>
       </Label>
    </left>
-   <right>
-      <Label fx:id="missedlbl" text="Missed: " textFill="#fdb927" BorderPane.alignment="CENTER">
-         <font>
-            <Font name="System Bold Italic" size="48.0" />
-         </font>
-         <BorderPane.margin>
-            <Insets right="200.0" />
-         </BorderPane.margin>
-      </Label>
-   </right>
    <bottom>
       <Label fx:id="totallbl" text="Total Habits: " textFill="#fdb927" BorderPane.alignment="BOTTOM_CENTER">
          <font>
@@ -61,4 +50,20 @@
          </BorderPane.margin>
       </Label>
    </bottom>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="GetDatabtn" layoutX="10.0" layoutY="32.0" mnemonicParsing="false" onAction="#displayData" text="Get Data" textFill="#fdb927">
+               <font>
+                  <Font name="SansSerif Bold" size="15.0" />
+               </font>
+            </Button>
+            <Label fx:id="missedlbl" layoutX="113.0" layoutY="139.0" text="Missed: " textFill="#fdb927">
+               <font>
+                  <Font name="System Bold Italic" size="48.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </center>
 </BorderPane>

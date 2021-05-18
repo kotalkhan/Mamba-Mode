@@ -63,6 +63,7 @@ public class AddController {
      	if(sat.isSelected()){
     		week[6] = true;
     	}
+     	
      	//if no days are selected
      	if(!sun.isSelected() && !mon.isSelected() && !tue.isSelected() && !wed.isSelected() 
      			&& !thu.isSelected() && !fri.isSelected() && !sat.isSelected()) {

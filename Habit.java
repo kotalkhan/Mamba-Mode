@@ -8,7 +8,6 @@ public class Habit {
 	private boolean[] daysOfWeek;
 	private int goal;
 	private int[] status;
-	private String days;
 
 	/**
 	 * 
@@ -24,7 +23,6 @@ public class Habit {
 		this.goal = goal;
 		this.daysOfWeek = dOW;
 		this.status = status;
-		days = boolToStr(dOW);
 	}
 
 	/**
@@ -113,14 +111,4 @@ public class Habit {
 		return s;
 	}
 
-	public String boolToStr(boolean[] dOW) {
-		String result = "";
-		String [] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-			
-		for(int i = 0; i < daysOfWeek.length; i++) {
-			if(daysOfWeek[i] == true)
-				result += days[i] + ", ";
-		}
-		return result;  	
-    }
 }

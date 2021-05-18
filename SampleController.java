@@ -1,24 +1,20 @@
 package application;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.TimeZone;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 
-public class SampleController 
-{
+public class SampleController{
 
     @FXML
     private Button btn1;
@@ -26,7 +22,6 @@ public class SampleController
     @FXML
     private Button btn2;
 
-    
     @FXML
     public void home2habits() throws Exception {
     	Parent root = FXMLLoader.load(getClass().getResource("Sample3.fxml"));
@@ -39,39 +34,7 @@ public class SampleController
     	Parent root = FXMLLoader.load(getClass().getResource("Sample2.fxml"));
     	Stage window = (Stage) btn1.getScene().getWindow();
     	window.setScene(new Scene(root, 850, 550));
-    	
-    	
     }
-    
-    @FXML Label donelbl;
-    
-    @FXML Label missedlbl;
-    
-    @FXML Label totallbl;
-    
-    
-    
-    
-    @FXML
-    public void displayData() 
-    {
-    	Statistics s  = new Statistics();
-    	TaskManager t = new TaskManager("tm");
-    	s.updateCounters(t);
-    	int done = s.getNumberDone();
-    	int missed = s.getMissed();    	
-    	    	
-    	
-    	donelbl.setText("Done: " + done);
-    	missedlbl.setText("Missed: " + missed);
-    	
-    	totallbl.setText("Total Habits: " + t.getHabits().size());
-    	
-    }
-    
-    @FXML Button GetDatabtn;
-	
-   
 
     @FXML
     private Button btn3;
@@ -111,8 +74,6 @@ public class SampleController
     	Parent root = FXMLLoader.load(getClass().getResource("Sample2.fxml"));
     	Stage window = (Stage) btn6.getScene().getWindow();
     	window.setScene(new Scene(root, 850, 550));
-    	
-    	
     }
     
     @FXML
@@ -173,37 +134,45 @@ public class SampleController
     }
     
     @FXML
-    private TextField habit;
-
+    private Button viewy;
+    
     @FXML
-    private CheckBox sun;
-
-    @FXML
-    private CheckBox mon;
-
-    @FXML
-    private CheckBox tue;
-
-    @FXML
-    private CheckBox wed;
-
-    @FXML
-    private CheckBox thu;
-
-    @FXML
-    private CheckBox fri;
-
-    @FXML
-    private CheckBox sat;
-
-    @FXML
-    void sendToAdd(ActionEvent event) {
-    	//get id, send to DB, clear
-    	Boolean [] week = new Boolean [6];
-     	if(sun.isSelected()) {
-    		week[0] = true;
-    	}
+    void viewHabit(ActionEvent event) {	
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view.fxml"));
+	    	Parent root = (Parent) fxmlLoader.load();
+			Stage stage = new Stage();
+	    	stage.setScene(new Scene(root));
+	    	root.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+	    	
+	    	stage.initModality(Modality.WINDOW_MODAL);
+	    	stage.initOwner(deletey.getScene().getWindow());
+	    	stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 	
     }
-
+    
+    @FXML private Label donelbl;
+    
+    @FXML private Label missedlbl;
+    
+    @FXML private Label totallbl;
+    
+	@FXML private Button GetDatabtn;
+    
+    @FXML
+    public void displayData() 
+    {
+    	Statistics s  = new Statistics();
+    	TaskManager t = new TaskManager("tm");
+    	
+    	int done = s.getNumberDone();
+    	int missed = s.getMissed();    	
+    	    	
+    	donelbl.setText("Done: " + done);
+    	missedlbl.setText("Missed: " + missed);
+    	totallbl.setText("Total Habits: " + t.getHabits().size());   	
+    }
     
 }

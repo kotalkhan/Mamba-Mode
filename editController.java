@@ -3,13 +3,15 @@ package application;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -57,6 +59,7 @@ public class editController implements Initializable{
     	clear();
     	
     	Habit select = table.getSelectionModel().selectedItemProperty().get();
+    	if(select == null) return;
     		
     	if(select.getDays()[0] == true) {
     		sunE.setSelected(true);
@@ -147,12 +150,31 @@ public class editController implements Initializable{
     		count++;
     	}
      	
-     	//***edit habit in DB
+     	//if no days are selected
+     	if(count == 0) {
+     		infoBox1("Please choose at least one day", "Alert");
+     	}
+    
+ 		//***edit habit in DB
      	Habit allocate = table.getSelectionModel().selectedItemProperty().get();
 
      	tm.updateHabit(allocate, getHabit);
      	tm.updateDays(allocate, week);
      	tm.updateGoal(allocate, count);
+    }
+    
+    public static void infoBox1(String infoMessage, String titleBar)
+    {
+        infoBox2(infoMessage, titleBar, null);
+    }
+
+    public static void infoBox2(String infoMessage, String titleBar, String headerMessage)
+    {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle(titleBar);
+        alert.setHeaderText(headerMessage);
+        alert.setContentText(infoMessage);
+        alert.showAndWait();
     }
     
     private void clear() {

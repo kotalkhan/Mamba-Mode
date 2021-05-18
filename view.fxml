@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="550.0" prefWidth="850.0" style="-fx-background-color: #552583;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.viewController">
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="tb" layoutX="150.0" layoutY="108.0" onMousePressed="#updateStats" prefHeight="400.0" prefWidth="550.0">
+              <columns>
+                <TableColumn fx:id="hab" prefWidth="549.5999816894531" text="Habits To Do Today" />
+              </columns>
+            </TableView>
+            <Label layoutX="159.0" layoutY="47.0" text="If a habit is pressed, it is marked as completed" textFill="#fdb927">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
